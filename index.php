@@ -131,10 +131,6 @@ session_start();
         </div>
     </div>
 
-    <?php
-        var_dump($_SESSION);
-    ?>
-
     <div class="products-section" id="products" >
             <div class="title-cont">
                 <h2>Products</h2>
