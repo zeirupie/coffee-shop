@@ -7,8 +7,13 @@
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="fonts/all.css">
     <link rel="stylesheet" href="secondary.css">
+    <script src=script1.js defer></script>
 </head>
 <body>
+
+<?php
+session_start();
+?>
 
 <header>
     <h1 style="color:#4A3000;">I COFFEE</h1>
@@ -25,11 +30,61 @@
         </nav>
         
         <i class="fa fa-shopping-cart"></i>
-        
+        <!--
         <div class="loginRegister-cont">
             <button><a href="auth/login.php" style="color: black;text-decoration: none;">Login</a></button>
             <button id="signUpBtn"><a href="auth/register.php" style="color:white;text-decoration: none;">Sign-Up</a></button>
         </div>
+
+        -->
+
+        <?php
+            if(isset($_SESSION['logged_in']))
+            {
+                include "database/config.php";
+
+                $check_name = "SELECT customer_name FROM customer_account_tbl WHERE email = ?";
+                $stmt = $conn->prepare($check_name);
+                $stmt->bind_param("s", $_SESSION['email']);
+                $stmt->execute();
+                $stmt->store_result();
+
+                if ($stmt->num_rows > 0) {
+
+                    $stmt->bind_result($cus_name);
+                    $stmt->fetch();
+
+                    echo
+                    "
+                        <div class='profile' id='profile' style='cursor:pointer;display:flex;justify-content:center;align-items:center;'>
+                            <h3 style='margin-right:10px;color:gray;'>".$cus_name."</h3>
+                            <div class='profile_pic' style='width:50px;height:50px;background-color:#DEB887;border-radius:25px;overflow:hidden;'>
+                                <img src='' alt=''>
+                            </div>
+                        </div>
+                    ";
+                    
+                }
+            }
+            else
+                {
+                    echo
+                    "
+                        <div class='loginRegister-cont'>
+                            <button><a href='auth/login.php' style='color: black;text-decoration: none;'>Login</a></button>
+                            <button id='signUpBtn'><a href='auth/register.php' style='color:white;text-decoration: none;'>Sign-Up</a></button>
+                        </div>
+                    ";
+                }
+
+        ?>
+
+        <div class="profile-menu" id="profile_menu" style="display:none;height:300px;width:250px;background-color:white;position:fixed;top:80px;text-align:center;padding-top:15px;right:10px">
+            
+            <button onclick="window.location.href='auth/login.php'" style="padding:7px;width:100%;"><h3>logout</h3></button>
+            
+        </div>
+
     </div>
 </header>
 
@@ -75,6 +130,10 @@
             </div>
         </div>
     </div>
+
+    <?php
+        var_dump($_SESSION);
+    ?>
 
     <div class="products-section" id="products" >
             <div class="title-cont">
@@ -189,8 +248,6 @@
         <p>This website is created with love for coffee enthusiasts.</p>
     </div>
 </div>
-
-<script src="../script.js" defer></script>
 
 </body>
 </html>

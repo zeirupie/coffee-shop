@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($qry->execute()) {
         echo "<script>
             alert('Account Created Successfully!');
-            window.location.href='../index.php';
+            window.location.href='../auth/login.php';
         </script>";
     } else {
         echo "<script>

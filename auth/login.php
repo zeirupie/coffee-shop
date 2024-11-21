@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="../fonts/all.css">
 </head>
 <body>
+
+<?php
+session_start();
+session_destroy();
+?>
     
     <header>
         <h1 style="color:#4A3000;">I COFFEE</h1>
@@ -43,20 +48,20 @@
             </div>
     
             <div class="binary-login2">
-                <form action="" method="POST">
+                <form action="../database/login.php" method="POST">
                     <div style="text-align:center;"><i class="fas fa-user-circle"></i></div>
                     
                     <div class="div-cont-form">
                         <p>
                             Email: <br>
-                            <input type="email" placeholder="Enter your email" required>
+                            <input type="email" placeholder="Enter your email" name="email" required>
                         </p>
                     </div>
 
                     <div class="div-cont-form">
                         <p>
                             Password: <br>
-                            <input type="password" placeholder="Enter your password" required>
+                            <input type="password" placeholder="Enter your password" name="pass" required>
                         </p>
                     </div>
 
@@ -65,7 +70,7 @@
                     </div>
 
                     <div class="div-cont-form">
-                        <button type="submit">Login</button>
+                        <button type="submit" name="login">Login</button>
                     </div>
 
                     <div class="div-cont-form text-center" style="margin-top: 30px;">
