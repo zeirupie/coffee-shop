@@ -39,9 +39,11 @@ session_start();
         -->
 
         <?php
+
+            include "database/config.php";
+
             if(isset($_SESSION['logged_in']))
             {
-                include "database/config.php";
 
                 $check_name = "SELECT customer_name FROM customer_account_tbl WHERE email = ?";
                 $stmt = $conn->prepare($check_name);
@@ -116,18 +118,10 @@ session_start();
         <h2>Menu</h2>
         <h1>Our Signature Beverages</h1>
         <div class="menu-category-cont">
-            <div class="category-card cd1 clickable" >
-                <h3>Espresso</h3>
-            </div>
-            <div class="category-card cd2 clickable" >
-                <h3>Latte</h3>
-            </div>
-            <div class="category-card cd3 clickable" >
-                <h3>Cappuccino</h3>
-            </div>
-            <div class="category-card cd4 clickable" >
-                <h3>Cold Brew</h3>
-            </div>
+            
+            <?php
+                include "database/signature_beverages.php";
+            ?>
         </div>
     </div>
 
@@ -137,52 +131,11 @@ session_start();
                 <h1>Premium Coffee Beans</h1>
             </div>
         <div class="products-cont">
-            <div class="product-card clickable pc1">
-                <div class="product-text-cont">
-                    <h3>Premium Arabica</h3>
-                    <p class="star-review-cont">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <span>(4.8)</span>
-                    </p>
-                    <h3>₱<span>599</span></h3>
-                </div>
-            </div>
-            <div class="product-card clickable pc2" >
-                <div class="product-text-cont">
-                    <h3>Dark Roast Robusta</h3>
-                    <p class="star-review-cont">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <span>(4.7)</span>
-                    </p>
-                    <h3>₱<span>499</span></h3>
-                </div>
-            </div>
-            <div class="product-card clickable pc3" >
-                <div class="product-text-cont">
-                    <h3>House Blend</h3>
-                    <p class="star-review-cont">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <span>(4.9)</span>
-                    </p>
-                    <h3>₱<span>549</span></h3>
-                </div>
-            </div>
 
-            <div class="product-card clickable pc4">
-                <h2 style="color:white;">See More</h2>
-            </div>
+            <?php
+                include "database/home_product.php";
+            ?>
+
         </div>
     </div>
 
